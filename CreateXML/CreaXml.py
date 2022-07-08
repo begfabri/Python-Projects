@@ -64,10 +64,7 @@ def GenerateXML(fileName):
                         elif dimOblo[dim][0]=='SZ470':
                             b11=gfg.SubElement(b1,"D_Oblo")
                             b11.text=str(int(dimOblo[dim][1]))
-
-
-
-                
+               
     tree=gfg.ElementTree(root)
 
     with open(fileName,'wb') as files:
@@ -75,4 +72,4 @@ def GenerateXML(fileName):
 
 #Driver code
 if __name__=='__main__':
-    GenerateXML("C://Users//fabrizio_beggiato//PycharmProjects//PannelliXML//Catalog.xml")
+    GenerateXML("C://Users//****//Catalog.xml")
