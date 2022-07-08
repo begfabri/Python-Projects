@@ -1,10 +1,9 @@
 import xml.etree.ElementTree as gfg
 from importaLotti import importaLottiPannelli
 import pymssql
-conn=pymssql.connect(server='192.168.100.204',user='sa',password='trinity',database='TCEBALLAN')
+conn=pymssql.connect(server='192.168.100.***',user='***',password='****',database='******')
 cursor=conn.cursor()
-lottoIn=LottoFin='2S176'
-#importaLottiPannelli(lottoIn,LottoFin)
+importaLottiPannelli(lottoIn,LottoFin)
 cursor.execute("select CodiceArticolo from TE_LOTTI_SEZIONALI where Lotto='"+lottoIn+"'")
 ArticoliInLotto=cursor.fetchall()
 def GenerateXML(fileName):
