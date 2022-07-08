@@ -1,21 +1,23 @@
 def importaLottiPannelli(lotin,lotfin):
     
-    #connessione galileo
+    #connessione Galileo
     import pyodbc
     conn=pyodbc.connect(
         driver='{iSeries Access ODBC Driver}',
-        system='192.168.100.4',
-        uid='GALILEO80',
-        pwd='GALILEO80')
+        system='192.168.100.***',
+        uid='****',
+        pwd='****')
     cursor=conn.cursor()
 
-    #connessione tce
+    #connessione MS-SQL
     import pymssql
-    conn1=pymssql.connect(server='192.168.100.204',user='sa',password='trinity',database='TCEBALLAN')
+    conn1=pymssql.connect(
+        server='192.168.100.***',
+        user='***',
+        password='*****',
+        database='****')
     cursor1=conn1.cursor()
 
-    #lotin='2S176'
-    #lotfin='2S176'
     cursor.execute("SELECT CDARPO,QORDPO,RIFEPO,ORPRPO,CLIEPO,LOTTPO from BAL80DAT.PMORD00f where LOTTPO>='"+lotin+"' and LOTTPO<='"+lotfin+"' and cdarpo like '8%'")
     for rows in cursor:
         codice=rows[0][0:13]
@@ -24,7 +26,7 @@ def importaLottiPannelli(lotin,lotfin):
         ord_prod=rows[3]
         cliente=rows[4]
         n_lotto=rows[5]
-        #scrivo in tce
+        #scrivo in MS-SQL
         cursor1.execute("INSERT INTO TE_LOTTI_SEZIONALI (CodiceArticolo,Quantita,Riferimento,OrdProd,Cliente,Lotto) VALUES ('"+codice+"','"+str(int(quantita))+"','"+riferimento+"','"+ord_prod+"','"+cliente+"','"+n_lotto+"')")
         conn1.commit()
 
