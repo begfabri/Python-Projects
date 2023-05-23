@@ -1,7 +1,7 @@
 # Crea file XML di istruzione taglio automatico 
 
 
-Il presente programma viene utilizzata in una azienda leader nel settore delle porte da garage. Nello specifico serve all'ottimizzazione del processo di taglio dei pannelli sandwich utilizzati nelle porte sezionali. Per l'ottimizzazione del taglio dei pannelli, viene utilizzato un software di terze parti che, per eseguire l'operazione, richiede in ingresso un file in formato XML. Tae file contiene la lista delle porte completa delle specifiche delle lavorazioni da eseguire sui pannelli che compongono la porta sezionale. 
+Il presente programma viene utilizzata in una azienda leader nel settore delle porte da garage. Nello specifico serve all'ottimizzazione del processo di taglio dei pannelli sandwich utilizzati nelle porte sezionali. Per l'ottimizzazione del taglio dei pannelli, viene utilizzato un software di terze parti che, per eseguire l'operazione, richiede in ingresso un file in formato XML. Tale file contiene la lista delle porte completa delle specifiche delle lavorazioni da eseguire sui pannelli che compongono la porta sezionale. 
 
 
 # Descrizione casistica #
