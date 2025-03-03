@@ -12,9 +12,9 @@ ieri = (now - timedelta(days=1)).strftime('%Y%m%d')
 def get_db_connection():
     return pyodbc.connect(
         driver='{iSeries Access ODBC Driver}',
-        system='192.168.100.2',
-        uid='BALADMIN9',
-        pwd='ADMINBAL'
+        system='192.168.***.***',
+        uid='user',
+        pwd='passwd'
     )
 
 def execute_query(conn, query):
@@ -38,13 +38,13 @@ def create_excel_sheet(wb, sheet_name, data, columns):
         ws.sheet_properties.tabColor = 'FF0000'
 
 def analisi_pf():
-    cartella='C:/Users/fabrizio_beggiato/Desktop 2/File lavoro Magazzino/analisi inventario pf/'
+    cartella='destination-directory'
     file_name = cartella + 'Analisi_PF.xlsx'
     wb = load_workbook(file_name)
     
     with get_db_connection() as conn:
         # Query 1
-        query1 = """sELECT 
+        query1 = """SELECT 
     cdarmo,
     dsarmo,
     rifemm,
@@ -80,7 +80,7 @@ GROUP BY
     rifemm) as aggregated_data
 where
 	COALESCE(POSITIVI, 0) - COALESCE(NEGATIVI, 0)<>0
-order by cdarmo"""  # Inserisci la query completa qui
+order by cdarmo"""
         data1, columns1 = execute_query(conn, query1)
         create_excel_sheet(wb, 'Db', data1, columns1)
         
@@ -90,7 +90,7 @@ order by cdarmo"""  # Inserisci la query completa qui
         create_excel_sheet(wb, 'PF_Non_Sparati', data2, columns2)
         
         # Query 3
-        query3 = "select * from BAL90dat.pcimp00f where cdfaci='851' and dt01ci>='"+inizio_mese+"'"  # Inserisci la query completa qui
+        query3 = "select * from BAL90dat.pcimp00f where cdfaci='851' and dt01ci>='"+inizio_mese+"'" 
         data3, columns3 = execute_query(conn, query3)
         create_excel_sheet(wb, 'Fase851', data3, columns3)
         
@@ -105,7 +105,7 @@ order by cdarmo"""  # Inserisci la query completa qui
         create_excel_sheet(wb, 'Acquisti_Errati', data5, columns5)
     
         # Query 6
-        query6 = "SELECT cdarmd FROM BAL90dat.MGART02F mf WHERE CDARMd like '95%' AND cl02md='' AND dtmnmd>='"+inizio_mese+"'"  # Inserisci la query completa qui
+        query6 = "SELECT cdarmd FROM BAL90dat.MGART02F mf WHERE CDARMd like '95%' AND cl02md='' AND dtmnmd>='"+inizio_mese+"'" 
         data6, columns6 = execute_query(conn, query6)
         create_excel_sheet(wb, 'Caratt_Modello_Mancante', data6, columns6)
         
